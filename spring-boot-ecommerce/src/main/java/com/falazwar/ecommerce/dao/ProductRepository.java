@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 // this will expose rest api http://localhost:8080/api/products{?page,size,sort}
 // Spring Data REST will expose ALL HTTP method (POST, GET, GET(plural), PUT, DELETE)
+// Includes :
+// - http://localhost:8080/api/products?page=0&size=3 -> for pagination
+// - http://localhost:8080/api/products/99 -> for get by id
 @CrossOrigin
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
