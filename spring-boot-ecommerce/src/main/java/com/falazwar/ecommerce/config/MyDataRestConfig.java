@@ -1,7 +1,9 @@
 package com.falazwar.ecommerce.config;
 
+import com.falazwar.ecommerce.entity.Country;
 import com.falazwar.ecommerce.entity.Product;
 import com.falazwar.ecommerce.entity.ProductCategory;
+import com.falazwar.ecommerce.entity.State;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,21 +34,28 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
     HttpMethod[] theUnsupportedActions = {HttpMethod.PUT, HttpMethod.POST, HttpMethod.DELETE};
 
     // disable HTTP method for product
-    config.getExposureConfiguration()
-        .forDomainType(Product.class)
-        .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions)))
-        .withCollectionExposure(((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions)));
+    disableHttpMethods(Product.class, config, theUnsupportedActions);
 
     // disable HTTP method for product category
-    config.getExposureConfiguration()
-        .forDomainType(ProductCategory.class)
-        .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions)))
-        .withCollectionExposure(((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions)));
+    disableHttpMethods(ProductCategory.class, config, theUnsupportedActions);
+
+    // disable HTTP method for country
+    disableHttpMethods(Country.class, config, theUnsupportedActions);
+
+    // disable HTTP method for state
+    disableHttpMethods(State.class, config, theUnsupportedActions);
 
     //// these code below is added to expose the entity id
     // call an internal helper method
     exposeIds(config);
 
+  }
+
+  private static void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
+    config.getExposureConfiguration()
+        .forDomainType(theClass)
+        .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions)))
+        .withCollectionExposure(((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions)));
   }
 
   //// these code below is added to expose the entity id
