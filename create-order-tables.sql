@@ -76,3 +76,38 @@ CREATE TABLE `order_item` (
   CONSTRAINT `FK_order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   CONSTRAINT `FK_product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+--
+-- Handle customer by email
+--
+
+USE `full-stack-ecommerce`;
+
+-- clean up previous database tables
+
+SET FOREIGN_KEY_CHECKS=0;
+
+TRUNCATE customer;
+TRUNCATE orders;
+TRUNCATE order_item;
+TRUNCATE address;
+
+SET FOREIGN_KEY_CHECKS=1;
+
+ALTER TABLE customer ADD UNIQUE(email);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
