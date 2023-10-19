@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 // Includes :
 // - http://localhost:8080/api/products?page=0&size=3 -> for pagination
 // - http://localhost:8080/api/products/99 -> for get by id
-@CrossOrigin
+
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
   // Behind the scenes, Spring will execute a query similar to this :
