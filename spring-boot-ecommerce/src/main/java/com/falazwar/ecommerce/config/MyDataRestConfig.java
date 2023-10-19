@@ -1,6 +1,7 @@
 package com.falazwar.ecommerce.config;
 
 import com.falazwar.ecommerce.entity.Country;
+import com.falazwar.ecommerce.entity.Order;
 import com.falazwar.ecommerce.entity.Product;
 import com.falazwar.ecommerce.entity.ProductCategory;
 import com.falazwar.ecommerce.entity.State;
@@ -41,17 +42,12 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         HttpMethod.PATCH
     };
 
-    // disable HTTP method for product
+    // disable HTTP method
     disableHttpMethods(Product.class, config, theUnsupportedActions);
-
-    // disable HTTP method for product category
     disableHttpMethods(ProductCategory.class, config, theUnsupportedActions);
-
-    // disable HTTP method for country
     disableHttpMethods(Country.class, config, theUnsupportedActions);
-
-    // disable HTTP method for state
     disableHttpMethods(State.class, config, theUnsupportedActions);
+    disableHttpMethods(Order.class, config, theUnsupportedActions);
 
     //// these code below is added to expose the entity id
     // call an internal helper method
